@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divergeix Email Analyzer — Privacy Policy</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0f1e; color: #e0e0e0; padding: 40px 20px; line-height: 1.7; }
+.container { max-width: 700px; margin: 0 auto; }
+h1 { font-size: 24px; color: #fff; margin-bottom: 8px; }
+.subtitle { font-size: 13px; color: #64748b; margin-bottom: 30px; }
+h2 { font-size: 16px; color: #818cf8; margin: 24px 0 10px; }
+p, li { font-size: 14px; color: #94a3b8; margin-bottom: 10px; }
+ul { padding-left: 20px; margin-bottom: 14px; }
+a { color: #818cf8; }
+.footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: #475569; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Privacy Policy</h1>
+<p class="subtitle">Divergeix Email Analyzer — Chrome Extension</p>
+<p class="subtitle">Last updated: April 2026</p>
+
+<h2>Overview</h2>
+<p>Divergeix Email Analyzer is a browser extension that helps users analyze and summarize Gmail email threads. We are committed to protecting your privacy and being transparent about how the extension works.</p>
+
+<h2>Data Collection</h2>
+<p>This extension does <strong>not</strong> collect, store, or transmit any personal data to our servers. We do not have any servers. All processing happens locally in your browser or via direct API calls from your browser.</p>
+
+<h2>What Data the Extension Accesses</h2>
+<ul>
+<li><strong>Email content:</strong> The extension reads email thread content (sender names, dates, and message bodies) from the currently open Gmail thread — only when you click "Run Full Analysis" or use other features. This data is never stored on any external server.</li>
+<li><strong>API Key:</strong> Your API key is stored locally in your browser's storage (chrome.storage.sync). It is never shared with anyone.</li>
+</ul>
+
+<h2>How Email Content Is Processed</h2>
+<ul>
+<li>When you analyze an email, the thread content is sent directly from your browser to the AI API for processing.</li>
+<li>The API processes the content and returns the analysis results.</li>
+<li>No intermediary servers are involved — the call goes directly from your browser to the API.</li>
+<li>We do not log, store, or have access to any email content or API responses.</li>
+</ul>
+
+<h2>Local Storage</h2>
+<ul>
+<li><strong>API Key:</strong> Stored in chrome.storage.sync (encrypted by Chrome).</li>
+<li><strong>Theme preference:</strong> Light/dark mode choice stored in chrome.storage.local.</li>
+<li><strong>Analysis history:</strong> Last 5 analyses stored locally in chrome.storage.local for your convenience. You can clear this at any time from the History tab.</li>
+</ul>
+
+<h2>Third-Party Services</h2>
+<ul>
+<li>The extension makes API calls to process email content. These calls are made directly from your browser using your own API key.</li>
+<li>Google Calendar links are generated locally — no data is sent until you choose to click the link.</li>
+</ul>
+
+<h2>Permissions Explained</h2>
+<ul>
+<li><strong>mail.google.com:</strong> Required to read email thread content from Gmail for analysis.</li>
+<li><strong>storage:</strong> Required to save your API key and preferences locally.</li>
+<li><strong>clipboardWrite/Read:</strong> Required for copy-to-clipboard features (Copy Reply, Copy as WhatsApp, etc.).</li>
+</ul>
+
+<h2>Data Retention</h2>
+<p>All data is stored locally in your browser. Uninstalling the extension removes all stored data. No data is retained on any external server.</p>
+
+<h2>Children's Privacy</h2>
+<p>This extension is not directed at children under the age of 13.</p>
+
+<h2>Changes to This Policy</h2>
+<p>We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated date.</p>
+
+<h2>Contact</h2>
+<p>If you have questions about this privacy policy, contact us at: <strong>divergeix@gmail.com</strong></p>
+
+<div class="footer">
+Divergeix Email Analyzer &copy; 2026 Divergeix
+</div>
+
+</div>
+</body>
+</html>
