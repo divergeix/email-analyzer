@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divergeix Email Analyzer — Pricing</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #0f172a; min-height: 100vh; }
+
+.header { text-align: center; padding: 40px 20px 20px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.logo svg { width: 48px; height: 48px; }
+.logo-text { font-size: 24px; font-weight: 900; }
+.logo-text span { color: #22c55e; }
+.header h1 { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+.header p { font-size: 16px; color: #64748b; max-width: 500px; margin: 0 auto; }
+
+.toggle-wrap { text-align: center; margin: 24px 0; }
+.toggle { display: inline-flex; background: #e2e8f0; border-radius: 30px; padding: 4px; }
+.toggle button { padding: 10px 24px; border: none; border-radius: 26px; font-size: 14px; font-weight: 600; cursor: pointer; background: transparent; color: #64748b; transition: all 0.2s; }
+.toggle button.active { background: #fff; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.save-badge { display: inline-block; background: #22c55e; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+
+.plans { display: flex; justify-content: center; gap: 20px; padding: 20px; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
+
+.plan { background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; padding: 32px 28px; width: 300px; position: relative; transition: all 0.2s; }
+.plan:hover { border-color: #cbd5e1; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.plan.popular { border-color: #4F46E5; }
+.plan.popular::before { content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #4F46E5; color: #fff; font-size: 11px; font-weight: 800; padding: 4px 16px; border-radius: 20px; letter-spacing: 0.5px; }
+
+.plan-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.plan-desc { font-size: 13px; color: #64748b; margin-bottom: 16px; }
+.plan-price { font-size: 40px; font-weight: 900; margin-bottom: 4px; }
+.plan-price span { font-size: 16px; font-weight: 500; color: #94a3b8; }
+.plan-period { font-size: 13px; color: #94a3b8; margin-bottom: 20px; }
+.plan-original { text-decoration: line-through; color: #94a3b8; font-size: 14px; margin-bottom: 2px; }
+
+.plan-btn { display: block; width: 100%; padding: 14px; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-bottom: 20px; }
+.plan-btn.primary { background: #4F46E5; color: #fff; }
+.plan-btn.primary:hover { background: #4338ca; }
+.plan-btn.secondary { background: #f1f5f9; color: #0f172a; }
+.plan-btn.secondary:hover { background: #e2e8f0; }
+
+.features { list-style: none; }
+.features li { font-size: 13.5px; padding: 6px 0; color: #334155; display: flex; align-items: center; gap: 8px; }
+.features li::before { content: '✓'; color: #22c55e; font-weight: 700; font-size: 14px; }
+.features li.locked::before { content: '✗'; color: #94a3b8; }
+.features li.locked { color: #94a3b8; }
+
+.free-plan { background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px 28px; max-width: 700px; margin: 30px auto; text-align: center; }
+.free-plan h3 { font-size: 18px; margin-bottom: 6px; }
+.free-plan p { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+.free-features { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; font-size: 13px; color: #64748b; }
+
+.footer { text-align: center; padding: 30px 20px; color: #94a3b8; font-size: 12px; }
+.footer a { color: #4F46E5; text-decoration: none; }
+
+.trust { display: flex; justify-content: center; gap: 30px; margin: 20px auto; flex-wrap: wrap; }
+.trust-item { font-size: 13px; color: #64748b; display: flex; align-items: center; gap: 6px; }
+
+#status { display: none; text-align: center; margin: 16px auto; padding: 12px 24px; border-radius: 10px; max-width: 500px; font-size: 14px; }
+#status.success { display: block; background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+#status.error { display: block; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="55,10 80,24 80,52 55,66 30,52 30,24" fill="#1e40af" opacity="0.95"/>
+      <polygon points="45,34 70,48 70,76 45,90 20,76 20,48" fill="#22c55e" opacity="0.9"/>
+      <text x="42" y="72" font-family="Arial" font-size="36" font-weight="900" fill="white" text-anchor="middle">D</text>
+    </svg>
+    <div class="logo-text">Diverge<span>IX</span></div>
+  </div>
+  <h1>Choose Your Plan</h1>
+  <p>Unlock the full power of AI email analysis. Cancel anytime.</p>
+</div>
+
+<div id="status"></div>
+
+<div class="toggle-wrap">
+  <div class="toggle">
+    <button id="monthlyBtn" class="active" onclick="setBilling('monthly')">Monthly</button>
+    <button id="annualBtn" onclick="setBilling('annual')">Annual <span class="save-badge">Save 50%</span></button>
+  </div>
+</div>
+
+<div class="plans" id="plansContainer">
+  <!-- Starter -->
+  <div class="plan">
+    <div class="plan-name">Starter</div>
+    <div class="plan-desc">For casual users</div>
+    <div class="plan-original" id="starter-original"></div>
+    <div class="plan-price" id="starter-price">₹420<span>/mo</span></div>
+    <div class="plan-period" id="starter-period">Billed monthly</div>
+    <button class="plan-btn secondary" onclick="subscribe('starter')">Get Starter</button>
+    <ul class="features">
+      <li>10 emails per day</li>
+      <li>Full analysis & summary</li>
+      <li>AI reply drafts (4 tones)</li>
+      <li>Elaborate & refine</li>
+      <li>Chat about threads</li>
+      <li>Export (PDF, WhatsApp, Tasks)</li>
+      <li>Calendar sync</li>
+      <li>5-slot history</li>
+      <li class="locked">Translate</li>
+      <li class="locked">Priority support</li>
+    </ul>
+  </div>
+
+  <!-- Pro -->
+  <div class="plan popular">
+    <div class="plan-name">Pro</div>
+    <div class="plan-desc">For professionals</div>
+    <div class="plan-original" id="pro-original"></div>
+    <div class="plan-price" id="pro-price">₹840<span>/mo</span></div>
+    <div class="plan-period" id="pro-period">Billed monthly</div>
+    <button class="plan-btn primary" onclick="subscribe('pro')">Get Pro</button>
+    <ul class="features">
+      <li>25 emails per day</li>
+      <li>Full analysis & summary</li>
+      <li>AI reply drafts (4 tones)</li>
+      <li>Elaborate & refine</li>
+      <li>Chat about threads</li>
+      <li>Export (PDF, WhatsApp, Tasks)</li>
+      <li>Calendar sync</li>
+      <li>5-slot history</li>
+      <li>Translate to any language</li>
+      <li>Priority support</li>
+    </ul>
+  </div>
+
+  <!-- Business -->
+  <div class="plan">
+    <div class="plan-name">Business</div>
+    <div class="plan-desc">For power users</div>
+    <div class="plan-original" id="business-original"></div>
+    <div class="plan-price" id="business-price">₹1,430<span>/mo</span></div>
+    <div class="plan-period" id="business-period">Billed monthly</div>
+    <button class="plan-btn secondary" onclick="subscribe('business')">Get Business</button>
+    <ul class="features">
+      <li>50 emails per day</li>
+      <li>Full analysis & summary</li>
+      <li>AI reply drafts (4 tones)</li>
+      <li>Elaborate & refine</li>
+      <li>Chat about threads</li>
+      <li>Export (PDF, WhatsApp, Tasks)</li>
+      <li>Calendar sync</li>
+      <li>5-slot history</li>
+      <li>Translate to any language</li>
+      <li>Priority support</li>
+    </ul>
+  </div>
+</div>
+
+<div class="free-plan">
+  <h3>Free Plan</h3>
+  <p>3 emails/day • Basic analysis only • First 24 hours: all features unlocked</p>
+  <div class="free-features">
+    <span>✓ Summary</span>
+    <span>✓ Intel tab</span>
+    <span>✓ Flow tab</span>
+    <span>✗ Reply</span>
+    <span>✗ Chat</span>
+    <span>✗ Export</span>
+  </div>
+</div>
+
+<div class="trust">
+  <div class="trust-item">🔒 Secure payments via Razorpay</div>
+  <div class="trust-item">🔄 Cancel anytime</div>
+  <div class="trust-item">💳 GPay, UPI, Cards, Net Banking</div>
+</div>
+
+<div class="footer">
+  <p>Divergeix Email Analyzer &copy; 2026 | <a href="privacy-policy.html">Privacy Policy</a> | <a href="mailto:divergeix@gmail.com">Support</a></p>
+  <p style="margin-top:6px;">Payments processed securely by Razorpay. All prices in INR.</p>
+</div>
+
+<script>
+// ─── Config ───
+var SERVER_URL = 'https://divergeix-server.onrender.com'; // UPDATE after deploying
+var RZP_KEY = 'rzp_live_Sb2750E8KGHfeY';
+var billing = 'monthly';
+
+// Get userId from URL params (extension passes it)
+var params = new URLSearchParams(window.location.search);
+var userId = params.get('uid') || 'guest_' + Date.now();
+var userEmail = params.get('email') || '';
+var userName = params.get('name') || '';
+
+// ─── Pricing data ───
+var prices = {
+  starter:  { monthly: '₹420',   annual: '₹2,499', monthlyPer: '₹420/mo',  annualPer: '₹208/mo', monthlySave: '', annualSave: '₹5,040 → ₹2,499' },
+  pro:      { monthly: '₹840',   annual: '₹4,999', monthlyPer: '₹840/mo',  annualPer: '₹417/mo', monthlySave: '', annualSave: '₹10,080 → ₹4,999' },
+  business: { monthly: '₹1,430', annual: '₹8,399', monthlyPer: '₹1,430/mo', annualPer: '₹700/mo', monthlySave: '', annualSave: '₹17,160 → ₹8,399' }
+};
+
+function setBilling(type) {
+  billing = type;
+  document.getElementById('monthlyBtn').className = type === 'monthly' ? 'active' : '';
+  document.getElementById('annualBtn').className = type === 'annual' ? 'active' : '';
+
+  ['starter', 'pro', 'business'].forEach(function(p) {
+    var d = prices[p];
+    if (type === 'monthly') {
+      document.getElementById(p + '-price').innerHTML = d.monthly + '<span>/mo</span>';
+      document.getElementById(p + '-period').textContent = 'Billed monthly';
+      document.getElementById(p + '-original').textContent = '';
+    } else {
+      document.getElementById(p + '-price').innerHTML = d.annualPer.replace('/mo', '') + '<span>/mo</span>';
+      document.getElementById(p + '-period').textContent = d.annual + ' billed yearly';
+      document.getElementById(p + '-original').textContent = d.annualSave;
+    }
+  });
+}
+
+function showStatus(msg, type) {
+  var el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = type;
+}
+
+async function subscribe(plan) {
+  var planKey = plan + '_' + billing;
+  showStatus('Creating subscription...', 'success');
+
+  try {
+    // Call backend to create subscription
+    var res = await fetch(SERVER_URL + '/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-user-id': userId },
+      body: JSON.stringify({ planKey: planKey, email: userEmail, name: userName })
+    });
+
+    var data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+
+    // Open Razorpay Checkout
+    var options = {
+      key: RZP_KEY,
+      subscription_id: data.data.subscriptionId,
+      name: 'Divergeix Email Analyzer',
+      description: plan.charAt(0).toUpperCase() + plan.slice(1) + ' Plan (' + billing + ')',
+      image: 'https://divergeix.github.io/email-analyzer/icon128.png',
+      handler: function(response) {
+        verifyPayment(response, planKey);
+      },
+      prefill: {
+        name: userName,
+        email: userEmail
+      },
+      theme: { color: '#4F46E5' },
+      modal: {
+        ondismiss: function() {
+          showStatus('Payment cancelled. You can try again.', 'error');
+        }
+      }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+    document.getElementById('status').style.display = 'none';
+
+  } catch (e) {
+    showStatus('Error: ' + e.message, 'error');
+  }
+}
+
+async function verifyPayment(response, planKey) {
+  showStatus('Verifying payment...', 'success');
+
+  try {
+    var res = await fetch(SERVER_URL + '/api/payment/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-user-id': userId },
+      body: JSON.stringify({
+        razorpay_subscription_id: response.razorpay_subscription_id,
+        razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_signature: response.razorpay_signature,
+        planKey: planKey
+      })
+    });
+
+    var data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+
+    showStatus('Payment successful! Your plan has been upgraded. You can close this tab.', 'success');
+
+    // Notify extension via postMessage (if opened from extension)
+    if (window.opener) {
+      window.opener.postMessage({ type: 'divergeix-plan-upgraded', plan: planKey }, '*');
+    }
+
+  } catch (e) {
+    showStatus('Verification error: ' + e.message + '. Your payment was received — plan will update shortly.', 'error');
+  }
+}
+</script>
+</body>
+</html>
