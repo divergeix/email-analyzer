@@ -18,6 +18,16 @@ h1 { font-size: 28px; color: #fff; margin-bottom: 8px; }
 .feature-desc { font-size: 11.5px; color: #64748b; line-height: 1.5; }
 .cta { display: inline-block; padding: 14px 32px; background: #4F46E5; color: #fff; text-decoration: none; border-radius: 10px; font-size: 15px; font-weight: 700; margin-bottom: 16px; }
 .cta:hover { background: #6366f1; }
+.trust-section { margin: 30px 0; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.trust-badges { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.trust-badge { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.trust-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.trust-icon.ssl { background: rgba(34,197,94,0.12); }
+.trust-icon.gdpr { background: rgba(59,130,246,0.12); }
+.trust-icon.nodata { background: rgba(168,85,247,0.12); }
+.trust-icon.cws { background: rgba(251,146,60,0.12); }
+.trust-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+.trust-sub { font-size: 10px; color: #475569; max-width: 100px; line-height: 1.4; }
 .links { display: flex; justify-content: center; gap: 20px; margin-top: 16px; }
 .links a { color: #818cf8; text-decoration: none; font-size: 13px; }
 .links a:hover { text-decoration: underline; }
@@ -65,7 +75,33 @@ h1 { font-size: 28px; color: #fff; margin-bottom: 8px; }
 
   <a class="cta" href="https://chrome.google.com/webstore">Install from Chrome Web Store</a>
 
+  <div class="trust-section">
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <div class="trust-icon ssl">&#128274;</div>
+        <div class="trust-label">SSL Encrypted</div>
+        <div class="trust-sub">256-bit encryption on all connections</div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-icon gdpr">&#128737;</div>
+        <div class="trust-label">GDPR Compliant</div>
+        <div class="trust-sub">View or delete your data anytime</div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-icon nodata">&#128274;</div>
+        <div class="trust-label">No Data Stored</div>
+        <div class="trust-sub">Emails processed in real-time, never saved</div>
+      </div>
+      <div class="trust-badge">
+        <div class="trust-icon cws">&#10003;</div>
+        <div class="trust-label">CWS Verified</div>
+        <div class="trust-sub">Reviewed and approved by Chrome Web Store</div>
+      </div>
+    </div>
+  </div>
+
   <div class="links">
+    <a href="pricing.html">Pricing</a>
     <a href="privacy-policy.html">Privacy Policy</a>
     <a href="mailto:divergeix@gmail.com">Contact</a>
   </div>
