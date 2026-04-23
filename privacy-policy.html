@@ -7,77 +7,148 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0f1e; color: #e0e0e0; padding: 40px 20px; line-height: 1.7; }
-.container { max-width: 700px; margin: 0 auto; }
-h1 { font-size: 24px; color: #fff; margin-bottom: 8px; }
+.container { max-width: 780px; margin: 0 auto; }
+h1 { font-size: 26px; color: #fff; margin-bottom: 8px; }
 .subtitle { font-size: 13px; color: #64748b; margin-bottom: 30px; }
-h2 { font-size: 16px; color: #818cf8; margin: 24px 0 10px; }
+h2 { font-size: 17px; color: #818cf8; margin: 28px 0 10px; }
+h3 { font-size: 14px; color: #cbd5e1; margin: 18px 0 8px; }
 p, li { font-size: 14px; color: #94a3b8; margin-bottom: 10px; }
-ul { padding-left: 20px; margin-bottom: 14px; }
+ul, ol { padding-left: 22px; margin-bottom: 14px; }
+li { margin-bottom: 6px; }
 a { color: #818cf8; }
-.footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: #475569; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+th, td { padding: 9px 12px; text-align: left; border: 1px solid rgba(255,255,255,0.08); color: #94a3b8; vertical-align: top; }
+th { background: rgba(129,140,248,0.08); color: #e0e0e0; font-weight: 600; }
+code, .code { font-family: Consolas, 'Courier New', monospace; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 3px; font-size: 13px; color: #cbd5e1; }
+.callout { background: rgba(129,140,248,0.06); border-left: 3px solid #818cf8; padding: 12px 16px; margin: 16px 0; font-size: 13.5px; color: #cbd5e1; border-radius: 4px; }
+.footer { margin-top: 48px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: #475569; }
+.footer-links { margin-bottom: 10px; }
+.footer-links a { margin-right: 14px; font-size: 12px; color: #64748b; text-decoration: none; }
+.footer-links a:hover { color: #818cf8; }
 </style>
 </head>
 <body>
 <div class="container">
 
 <h1>Privacy Policy</h1>
-<p class="subtitle">Divergeix Email Analyzer — Chrome Extension</p>
-<p class="subtitle">Last updated: April 2026</p>
+<p class="subtitle">Divergeix Email Analyzer · Last updated: April 19, 2026</p>
 
-<h2>Overview</h2>
-<p>Divergeix Email Analyzer is a browser extension that helps users analyze and summarize Gmail email threads. We are committed to protecting your privacy and being transparent about how the extension works.</p>
-
-<h2>Data Collection</h2>
-<p>This extension does <strong>not</strong> collect, store, or transmit any personal data to our servers. We do not have any servers. All processing happens locally in your browser or via direct API calls from your browser.</p>
-
-<h2>What Data the Extension Accesses</h2>
+<h2>1. Who we are</h2>
+<p>This policy describes how <strong>Divergeix Worldwide Private Limited</strong> (“Divergeix”, “we”, “our”, “us”) collects, uses, and protects personal data when you use the <strong>Divergeix Email Analyzer</strong> Chrome Extension and related services.</p>
 <ul>
-<li><strong>Email content:</strong> The extension reads email thread content (sender names, dates, and message bodies) from the currently open Gmail thread — only when you click "Run Full Analysis" or use other features. This data is never stored on any external server.</li>
-<li><strong>API Key:</strong> Your API key is stored locally in your browser's storage (chrome.storage.sync). It is never shared with anyone.</li>
+  <li><strong>Legal Name:</strong> Divergeix Worldwide Private Limited</li>
+  <li><strong>GSTIN:</strong> 21AALCD8807G1ZP</li>
+  <li><strong>Jurisdiction:</strong> Odisha, India</li>
+  <li><strong>Contact:</strong> <a href="mailto:divergeix@gmail.com">divergeix@gmail.com</a></li>
+  <li><strong>Grievance Officer:</strong> Satya Ojha, Admin — <a href="mailto:divergeix@gmail.com">divergeix@gmail.com</a></li>
 </ul>
 
-<h2>How Email Content Is Processed</h2>
+<h2>2. What data we collect</h2>
+<p>We deliberately minimise what we collect. The following table lists every category:</p>
+<table>
+  <thead><tr><th>Data</th><th>Source</th><th>Why</th><th>Stored</th></tr></thead>
+  <tbody>
+    <tr><td>Auto-generated User ID</td><td>Your Chrome browser (random string, created on install)</td><td>Identify your subscription + usage quota</td><td>In your browser + in our server database</td></tr>
+    <tr><td>Email address (optional)</td><td>Read from your signed-in Chrome profile via <code>chrome.identity</code> API, with your one-time permission</td><td>Link your plan across devices; account recovery on reinstall</td><td>In our server database, lowercased</td></tr>
+    <tr><td>Subscription plan + daily usage count</td><td>Generated as you use the service</td><td>Enforce plan limits; show quota in the panel</td><td>In our server database</td></tr>
+    <tr><td>Gmail email thread content (sender, date, body)</td><td>The Gmail tab you're viewing, when you click Analyze / Generate Reply / etc.</td><td>Sent to the AI model to produce the analysis or reply you asked for</td><td><strong>Never stored.</strong> Processed in real time and discarded after the response is returned</td></tr>
+    <tr><td>Payment data (card number, UPI, CVV)</td><td>You, on the Razorpay checkout page</td><td>Process subscription payment</td><td><strong>We never see or store this.</strong> Razorpay handles it under PCI-DSS compliance</td></tr>
+    <tr><td>Subscription metadata (plan, amount, renewal date, subscription ID)</td><td>Razorpay webhook after your payment</td><td>Activate your plan and keep it in sync</td><td>In our server database</td></tr>
+    <tr><td>History of your past analyses (last 5)</td><td>Your browser — stored only locally</td><td>Convenience feature in the History tab</td><td>In your browser's <code>chrome.storage.local</code>. Never transmitted to us.</td></tr>
+  </tbody>
+</table>
+
+<h2>3. What we do NOT collect</h2>
 <ul>
-<li>When you analyze an email, the thread content is sent directly from your browser to the AI API for processing.</li>
-<li>The API processes the content and returns the analysis results.</li>
-<li>No intermediary servers are involved — the call goes directly from your browser to the API.</li>
-<li>We do not log, store, or have access to any email content or API responses.</li>
+  <li>Your Gmail password or Google credentials</li>
+  <li>Any email content from threads you did not click Analyze / Reply on</li>
+  <li>Your attachments</li>
+  <li>Your browsing history outside of Gmail</li>
+  <li>Your IP address beyond temporary rate-limiting (not linked to your identity)</li>
+  <li>Any card / UPI / banking information (Razorpay handles this end-to-end)</li>
 </ul>
 
-<h2>Local Storage</h2>
+<h2>4. How we use the data</h2>
 <ul>
-<li><strong>API Key:</strong> Stored in chrome.storage.sync (encrypted by Chrome).</li>
-<li><strong>Theme preference:</strong> Light/dark mode choice stored in chrome.storage.local.</li>
-<li><strong>Analysis history:</strong> Last 5 analyses stored locally in chrome.storage.local for your convenience. You can clear this at any time from the History tab.</li>
+  <li><strong>Operating the service</strong> — authenticating you, enforcing plan limits, returning analyses and replies, billing you correctly</li>
+  <li><strong>Account recovery</strong> — if you reinstall and your Chrome profile email matches a paid account, we restore your plan automatically</li>
+  <li><strong>Support</strong> — responding to issues you email us about</li>
+  <li><strong>Legal compliance</strong> — GST invoicing, tax records, responding to lawful government requests</li>
+  <li><strong>Improving the product</strong> — aggregated, non-identifiable usage metrics (e.g. "how many users used Pro this month"). We do not train AI models on your emails.</li>
 </ul>
 
-<h2>Third-Party Services</h2>
+<h2>5. Third-party processors we share data with</h2>
+<table>
+  <thead><tr><th>Processor</th><th>What they see</th><th>Why</th><th>Their policy</th></tr></thead>
+  <tbody>
+    <tr><td>Anthropic PBC (USA)</td><td>Your Gmail thread content when you click Analyze / Reply / etc., routed from our server</td><td>AI analysis and reply generation</td><td><a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">anthropic.com/legal/privacy</a></td></tr>
+    <tr><td>Razorpay Software Private Limited (India)</td><td>Your name, email, payment instrument</td><td>Process subscription payments</td><td><a href="https://razorpay.com/privacy" target="_blank" rel="noopener">razorpay.com/privacy</a></td></tr>
+    <tr><td>Microsoft Azure (India)</td><td>Our server, where your user record lives</td><td>Hosting and database</td><td><a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener">privacy.microsoft.com</a></td></tr>
+    <tr><td>Google LLC</td><td>Provides the Chrome identity API we use to read your profile email</td><td>The Chrome platform itself</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td></tr>
+  </tbody>
+</table>
+<div class="callout">We do <strong>not</strong> sell your personal data. We do <strong>not</strong> share it with ad networks. We do <strong>not</strong> use it for purposes unrelated to the functioning of the service you paid for.</div>
+
+<h2>6. Where your data is stored</h2>
+<p>Primary servers and databases are hosted on <strong>Microsoft Azure, Central India region</strong>. AI processing is performed by Anthropic in the United States. Payment data is stored by Razorpay in India.</p>
+
+<h2>7. How long we keep data</h2>
 <ul>
-<li>The extension makes API calls to process email content. These calls are made directly from your browser using your own API key.</li>
-<li>Google Calendar links are generated locally — no data is sent until you choose to click the link.</li>
+  <li><strong>Email thread content you analyse:</strong> processed in memory, not persisted. Gone within seconds.</li>
+  <li><strong>User record (ID, email, plan, usage):</strong> retained while your account is active. If you delete your account, we retain it for up to <strong>8 years</strong> purely to comply with Section 128 of the Companies Act 2013 and the Income Tax Act 1961 (record-keeping), then delete.</li>
+  <li><strong>Payment / invoice records:</strong> 8 years (Income Tax Act requirement).</li>
+  <li><strong>Server logs:</strong> 30 days.</li>
+  <li><strong>Local browser data:</strong> until you uninstall the extension or clear your Chrome data — we have no control over this.</li>
 </ul>
 
-<h2>Permissions Explained</h2>
+<h2>8. Your rights</h2>
+<p>Under the Digital Personal Data Protection Act, 2023 (India) and, where applicable, the EU General Data Protection Regulation, you have the following rights:</p>
 <ul>
-<li><strong>mail.google.com:</strong> Required to read email thread content from Gmail for analysis.</li>
-<li><strong>storage:</strong> Required to save your API key and preferences locally.</li>
-<li><strong>clipboardWrite/Read:</strong> Required for copy-to-clipboard features (Copy Reply, Copy as WhatsApp, etc.).</li>
+  <li><strong>Access</strong> — see what personal data we hold about you. Use the extension's <code>/api/mydata</code> endpoint or email us.</li>
+  <li><strong>Correction</strong> — correct any inaccurate data (e.g. change the email linked to your account).</li>
+  <li><strong>Erasure</strong> — delete all personal data we hold. Use the <code>/api/mydata</code> <code>DELETE</code> endpoint or email us. Note: we retain billing records for 8 years as required by Indian tax law.</li>
+  <li><strong>Grievance redressal</strong> — escalate any privacy complaint to our Grievance Officer (see below). We respond within 30 days.</li>
+  <li><strong>Withdraw consent</strong> — you can uninstall the extension at any time; this revokes our access to future Gmail content.</li>
 </ul>
 
-<h2>Data Retention</h2>
-<p>All data is stored locally in your browser. Uninstalling the extension removes all stored data. No data is retained on any external server.</p>
+<h2>9. Security</h2>
+<ul>
+  <li>All traffic uses HTTPS / TLS 1.2 or higher</li>
+  <li>We don't use passwords, so none can be leaked</li>
+  <li>Payment data is PCI-DSS handled by Razorpay</li>
+  <li>Access to the production database is restricted and logged</li>
+  <li>Azure storage is encrypted at rest</li>
+</ul>
+<p>No system is 100% secure. In the event of a personal-data breach affecting you, we will notify you and the Data Protection Board of India without undue delay, as required by the DPDP Act 2023.</p>
 
-<h2>Children's Privacy</h2>
-<p>This extension is not directed at children under the age of 13.</p>
+<h2>10. Cookies and tracking</h2>
+<p>We do not set cookies. We do not run analytics scripts. The Chrome extension uses <code>chrome.storage</code> (a browser-local storage mechanism) to remember your preferences — this is not a cookie and is never transmitted to us.</p>
 
-<h2>Changes to This Policy</h2>
-<p>We may update this privacy policy from time to time. Any changes will be reflected on this page with an updated date.</p>
+<h2>11. Children</h2>
+<p>Our service is not intended for users under the age of 18. We do not knowingly collect data from minors.</p>
 
-<h2>Contact</h2>
-<p>If you have questions about this privacy policy, contact us at: <strong>divergeix@gmail.com</strong></p>
+<h2>12. Changes to this policy</h2>
+<p>We may update this policy to reflect changes to the service or to law. Material changes will be announced to users at least 15 days before they take effect, via the extension panel or the email address linked to your account.</p>
+
+<h2>13. Grievance Officer (as required by the DPDP Act, 2023)</h2>
+<ul>
+  <li><strong>Name:</strong> Satya Ojha</li>
+  <li><strong>Designation:</strong> Admin</li>
+  <li><strong>Email:</strong> <a href="mailto:divergeix@gmail.com">divergeix@gmail.com</a></li>
+  <li><strong>Response time:</strong> We acknowledge within 48 hours and resolve within 30 days.</li>
+</ul>
 
 <div class="footer">
-Divergeix Email Analyzer &copy; 2026 Divergeix
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="refund.html">Refunds</a>
+    <a href="cancellation.html">Cancellation</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  Divergeix Worldwide Private Limited · Odisha, India · GSTIN 21AALCD8807G1ZP · <a href="mailto:divergeix@gmail.com">divergeix@gmail.com</a>
 </div>
 
 </div>
