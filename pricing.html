@@ -89,6 +89,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
 </div>
 
+<!-- v1.5.0: email gate — captured before checkout to ensure
+     billing email = subscription/account email (no mismatch later) -->
+<div id="emailGate" style="max-width:520px;margin:0 auto 24px;padding:20px 24px;background:#fff;border:2px solid #4F46E5;border-radius:12px;box-shadow:0 4px 16px rgba(79,70,229,0.08)">
+  <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px">📧 Your billing email</div>
+  <div style="font-size:12.5px;color:#64748b;margin-bottom:12px;line-height:1.5">
+    This email will receive your <b>GST invoice</b>, your <b>Razorpay receipt</b>, and is how you <b>activate your subscription</b> in the extension after payment.
+  </div>
+  <input type="email" id="billingEmail" placeholder="you@example.com" required
+    style="width:100%;padding:11px 14px;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;color:#0f172a;font-family:inherit;outline:none;box-sizing:border-box"
+    oninput="this.style.borderColor=validateEmail(this.value)?'#22c55e':'#cbd5e1'">
+  <div id="emailGateMsg" style="font-size:11.5px;color:#ef4444;margin-top:6px;display:none"></div>
+  <div style="font-size:11px;color:#94a3b8;margin-top:8px;line-height:1.4">
+    Tip: this can be different from your Chrome account email. Use whichever email you want the GST invoice sent to.
+  </div>
+</div>
+
 <div class="plans" id="plansContainer">
   <!-- Starter -->
   <div class="plan">
@@ -227,6 +243,18 @@ var userId = params.get('uid') || 'guest_' + Date.now();
 var userEmail = params.get('email') || '';
 var userName = params.get('name') || '';
 
+// v1.5.0: pre-fill the email gate with whatever the extension sent
+// (Chrome profile email if user granted identity permission)
+window.addEventListener('DOMContentLoaded', function () {
+  var input = document.getElementById('billingEmail');
+  if (input && userEmail) input.value = userEmail;
+});
+
+function validateEmail(e) {
+  if (!e) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e).trim());
+}
+
 // ─── Pricing data ───
 var prices = {
   starter:  { monthly: '₹420',   annual: '₹2,499', monthlyPer: '₹420/mo',  annualPer: '₹208/mo', monthlySave: '', annualSave: '₹5,040 → ₹2,499' },
@@ -260,6 +288,25 @@ function showStatus(msg, type) {
 }
 
 async function subscribe(plan) {
+  // v1.5.0: enforce billing email = subscription email
+  var emailInput = document.getElementById('billingEmail');
+  var billingEmail = emailInput ? String(emailInput.value || '').trim() : '';
+  var msgEl = document.getElementById('emailGateMsg');
+  if (!validateEmail(billingEmail)) {
+    if (msgEl) {
+      msgEl.textContent = 'Please enter a valid email — this is where your GST invoice will be sent.';
+      msgEl.style.display = 'block';
+    }
+    if (emailInput) {
+      emailInput.style.borderColor = '#ef4444';
+      emailInput.focus();
+    }
+    return;
+  }
+  if (msgEl) msgEl.style.display = 'none';
+  // Override any URL-passed email with what the user typed (locked through to Razorpay)
+  userEmail = billingEmail;
+
   var planKey = plan + '_' + billing;
   showStatus('Creating subscription...', 'success');
 
@@ -268,7 +315,7 @@ async function subscribe(plan) {
     var res = await fetch(SERVER_URL + '/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-user-id': userId },
-      body: JSON.stringify({ planKey: planKey, email: userEmail, name: userName })
+      body: JSON.stringify({ planKey: planKey, email: billingEmail, name: userName })
     });
 
     var data = await res.json();
@@ -286,8 +333,11 @@ async function subscribe(plan) {
       },
       prefill: {
         name: userName,
-        email: userEmail
+        email: billingEmail
       },
+      // v1.5.0: lock email so users can't override it on the checkout page
+      // (ensures invoice email = account email)
+      readonly: { email: true },
       theme: { color: '#4F46E5' },
       modal: {
         ondismiss: function() {
